@@ -1,11 +1,11 @@
 provider "google" {
 project = "responsive-gist-322605"
-region = "asia-south1"
+region = "asia-south2"
 }
 
 resource "google_compute_instance" "myvm" {
 name = "myvm-dev"
-zone = "asia-south1-a"
+zone = "asia-south2-a"
 boot_disk {
 initialize_params {
   image = "debian-cloud/debian-9"
