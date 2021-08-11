@@ -1,5 +1,5 @@
 provider "google" {
-project = "My First Project"
+project = "	testterraform-322607"
 region = "us-west1"
 }
 
