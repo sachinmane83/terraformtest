@@ -1,5 +1,5 @@
 provider "google" {
-project = "qwiklabs-gcp-04-576cc70c1ddb"
+project = "My First Project"
 region = "us-west1"
 }
 
