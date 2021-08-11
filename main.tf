@@ -1,11 +1,11 @@
 provider "google" {
-project = "flash-app-319312"
-region = "us-west1"
+project = "testterraform-322607"
+region = "asia-west1"
 }
 
 resource "google_compute_instance" "myvm" {
 name = "myvm-dev"
-zone = "us-west1-c"
+zone = "asia-west1-c"
 boot_disk {
 initialize_params {
   image = "debian-cloud/debian-9"
