@@ -5,7 +5,7 @@ region = "asia-south2"
 
 resource "google_compute_instance" "myvm" {
 name = "myvm-dev"
-zone = "asia-south2-a"
+zone = "asia-south2-b"
 boot_disk {
 initialize_params {
   image = "debian-cloud/debian-9"
