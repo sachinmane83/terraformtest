@@ -28,3 +28,4 @@ resource "google_sql_user" "users" {
   instance = "${google_sql_database_instance.master.name}"
   host     = "*"
   password = "Curry000"
+}
