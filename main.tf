@@ -1,19 +1,30 @@
+variable "credentials" {}
+variable "project" {}
+variable "region" {}
+
 provider "google" {
-project = "responsive-gist-322605"
-region = "asia-south2"
+  credentials  = "${file("${var.credentials}")}"
+  project      = "${var.project}"
+  region       = "${var.region}"
 }
 
-resource "google_compute_instance" "myvm" {
-name = "myvm-dev"
-zone = "asia-south2-b"
-boot_disk {
-initialize_params {
-  image = "debian-cloud/debian-9"
-  size = "10"
+resource "google_sql_database_instance" "master" {
+  name = "master4"
+  database_version = "POSTGRES_9_6"
+  region       = "${var.region}"
+
+  settings {
+    tier = "db-f1-micro"
+  }
 }
+
+resource "google_sql_database" "database" {
+  name      = "udb"
+  instance  = "${google_sql_database_instance.master.name}"
 }
-machine_type = "f1-micro" 
-network_interface {
-network = "default"
-}
-}
+
+resource "google_sql_user" "users" {
+  name     = "postgres"
+  instance = "${google_sql_database_instance.master.name}"
+  host     = "*"
+  password = "Curry000"
