@@ -1,6 +1,5 @@
 provider "google" {
   project     = "responsive-gist-322605"
-  credentials = file("/root/terraform/key.json")
   region      = "us-central1"
   zone        = "us-central1-a"
 
