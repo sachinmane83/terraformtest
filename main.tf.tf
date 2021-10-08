@@ -1,31 +1,20 @@
-variable "credentials" {}
-variable "project" {}
-variable "region" {}
-
 provider "google" {
-  credentials  = "${file("${var.credentials}")}"
-  project      = "${var.project}"
-  region       = "${var.region}"
+  project     = "responsive-gist-322605"
+  credentials = file("/root/terraform/key.json")
+  region      = "us-central1"
+  zone        = "us-central1-a"
+
 }
 
-resource "google_sql_database_instance" "master" {
-  name = "master4"
-  database_version = "POSTGRES_9_6"
-  region       = "${var.region}"
-
-  settings {
-    tier = "db-f1-micro"
+variable "account_name" {
+  type = map(string)
+  default = {
+    "account1" = "devops1"
+    "account2" = "devops2"
+    "account3" = "devops3"
   }
 }
-
-resource "google_sql_database" "database" {
-  name      = "udb"
-  instance  = "${google_sql_database_instance.master.name}"
-}
-
-resource "google_sql_user" "users" {
-  name     = "postgres"
-  instance = "${google_sql_database_instance.master.name}"
-  host     = "*"
-  password = "Curry000"
+resource "google_iam_user" "iamuser" {
+  for_each = var.account_name
+  name     = "${each.value}-iam"
 }
