@@ -5,15 +5,20 @@ provider "google" {
 
 }
 
-variable "account_name" {
-  type = map(string)
-  default = {
-    "account1" = "devops1"
-    "account2" = "devops2"
-    "account3" = "devops3"
-  }
-}
-resource "google_iam_user" "iamuser" {
-  for_each = var.account_name
-  name     = "${each.value}-iam"
-}
+resource "google_compute_instance" "vm_instance" {
+      name         = "gcptutorials-vm"
+      machine_type = "f1-micro"
+    
+      boot_disk {
+        initialize_params {
+          image = "debian-cloud/debian-9"
+        }
+      }    
+      network_interface {       
+        network = "default"
+        access_config {
+        }
+      }
+    }
+    
+  
